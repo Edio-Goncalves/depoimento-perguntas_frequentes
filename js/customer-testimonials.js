@@ -28,3 +28,51 @@ const reviews = [
     text: "O Instagram é uma rede social online de compartilhamento de fotos e vídeos entre seus usuários, que permite aplicar filtros digitais e compartilhá-los em uma variedade de serviços de redes sociais, como Facebook, Twitter, Tumblr e Flickr. ",
   },
 ];
+
+const imgSrcEl = document.querySelector("#img");
+const authorEl = document.querySelector("#author");
+const jobEl = document.querySelector("#job");
+const infoEl = document.querySelector("#info");
+
+const prevBtn = document.querySelector(".prev-btn");
+const nextBtn = document.querySelector(".next-btn");
+const randomBtn = document.querySelector(".random-btn");
+
+let currentId = 0;
+
+window.addEventListener("DOMContentLoaded", function () {
+  argumento();
+});
+
+function argumento() {
+  const item = reviews[currentId];
+  imgSrcEl.src = item.img;
+  authorEl.textContent = item.name;
+  jobEl.textContent = item.job;
+  infoEl.textContent = item.text;
+}
+
+function prevId() {
+  currentId--;
+  if (currentId < 0) {
+    currentId = reviews.length - 1;
+  }
+  argumento();
+}
+
+function nextId() {
+  currentId++;
+  if (currentId > reviews.length - 1) {
+    currentId = 0;
+  }
+  argumento();
+}
+
+function randomId() {
+  currentId = Math.floor(Math.random() * reviews.length);
+  argumento(currentId);
+}
+
+prevBtn.addEventListener("click", prevId);
+nextBtn.addEventListener("click", nextId);
+randomBtn.addEventListener("click", randomId);
